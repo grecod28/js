@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro de Vehículo para Taller</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🚗 Registro de Nuevo Vehículo</h1>
+      <p>Introduce los datos del vehículo y el problema del cliente.</p>
+
+      <form id="vehiculo-form">
+        <fieldset class="form-group">
+          <legend>Datos del Vehículo</legend>
+          <div class="input-container">
+            <label for="matricula">Matrícula:</label>
+            <input
+              type="text"
+              id="matricula"
+              name="matricula"
+              required
+              placeholder="Ej: 1234ABC"
+            />
+          </div>
+          <div class="input-container">
+            <label for="marca">Marca:</label>
+            <input
+              type="text"
+              id="marca"
+              name="marca"
+              required
+              placeholder="Ej: Ford"
+            />
+          </div>
+          <div class="input-container">
+            <label for="modelo">Modelo:</label>
+            <input
+              type="text"
+              id="modelo"
+              name="modelo"
+              required
+              placeholder="Ej: Focus"
+            />
+          </div>
+          <div class="input-container">
+            <label for="year">Año:</label>
+            <input
+              type="number"
+              id="year"
+              name="year"
+              required
+              min="1900"
+              max="2099"
+              placeholder="Ej: 2018"
+            />
+          </div>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <legend>Datos del Cliente</legend>
+          <div class="input-container">
+            <label for="nombreCliente">Nombre Completo:</label>
+            <input
+              type="text"
+              id="nombreCliente"
+              name="nombreCliente"
+              required
+              placeholder="Ej: Juan Pérez"
+            />
+          </div>
+          <div class="input-container">
+            <label for="telefonoCliente">Teléfono:</label>
+            <input
+              type="tel"
+              id="telefonoCliente"
+              name="telefonoCliente"
+              required
+              placeholder="Ej: 600112233"
+            />
+          </div>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <legend>Problema Reportado</legend>
+          <div class="input-container full-width">
+            <label for="descripcionProblemaCliente"
+              >Descripción del Problema:</label
+            >
+            <textarea
+              id="descripcionProblemaCliente"
+              name="descripcionProblemaCliente"
+              rows="4"
+              required
+              placeholder="El motor hace un ruido extraño al arrancar..."
+            ></textarea>
+          </div>
+        </fieldset>
+
+        <button type="submit" id="submit-btn">Registrar Vehículo</button>
+      </form>
+
+      <div id="mensaje-feedback" class="feedback hidden"></div>
+    </div>
+
+    <section class="vehiculos-section">
+      <h2>Lista de Vehículos</h2>
+      <select id="filtroMatricula">
+        <option value="">-- Todos las matriculas --</option>
+      </select>
+      <select id="filtroEstado">
+        <option value="">-- Todos los estados --</option>
+        <option value="P">Para reparar</option>
+        <option value="A">Arreglando</option>
+        <option value="R">Reparado</option>
+      </select>
+
+      <ul id="vehiculos-list"></ul>
+    </section>
+
+    <dialog id="vehiculoDialog">
+      <button class="close-btn" id="closeModal">&times;</button>
+      <h2>Detalles del Vehículo</h2>
+      <p><strong>Matrícula:</strong> <span id="matricula-data"></span></p>
+      <p><strong>Marca:</strong> <span id="marca-data"></span></p>
+      <p><strong>Modelo:</strong> <span id="modelo-data"></span></p>
+      <p><strong>Año:</strong> <span id="year-data"></span></p>
+      <p><strong>Cliente:</strong> <span id="nombreCliente-data"></span></p>
+      <p><strong>Teléfono:</strong> <span id="telefonoCliente-data"></span></p>
+      <p><strong>Problema:</strong> <span id="descripcion-data"></span></p>
+      <p><strong>Estado:</strong> <span id="estado-data"></span></p>
+    </dialog>
+
+    <script defer type="module" src="./app.js"></script>
+  </body>
+</html>
