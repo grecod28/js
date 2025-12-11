@@ -26,9 +26,9 @@ export class Reparacion {
         (nombre) => nombre.toLowerCase() === nombreMecanico.toLowerCase()
       )
     )
-      throw new Error("Nombre mecanico debe ser un string");
+      throw new Error("Nombre mecanico debe estar en la lista");
 
     if (isNaN(parseFloat(precio)) || parseFloat(precio) < 0)
-      throw new Error("Precion invalido");
+      throw new Error("Precio invalido");
   }
 }

@@ -43,12 +43,19 @@ export class VehiculoModel {
     });
 
     this.listaVehiculos = nuevoArray;
+    this.guardarLista();
   }
 
-  repararVehiculo(matricula, descripcion, nombreMecanico, precio) {
+  repararVehiculo(
+    matricula,
+    descripcion = "Sin descripcion",
+    nombreMecanico = Reparacion.posiblesMecanicos[0],
+    precio = 0
+  ) {
     let nuevoArray = this.listaVehiculos.map((vehiculo) => {
       // Si el ID es 1, devuelve un nuevo objeto con el precio actualizado
 
+      console.log(vehiculo);
       if (vehiculo.matricula === matricula) {
         if (vehiculo.estado !== Vehiculo.estadosPosibles.paraArreglar)
           throw new Error(
@@ -64,7 +71,7 @@ export class VehiculoModel {
         return {
           ...vehiculo,
           reparaciones: [...vehiculo.reparaciones, nuevaReparacion],
-          estado: Vehiculo.estadosPosibles.recogido,
+          estado: Vehiculo.estadosPosibles.arreglado,
         }; // Sobreescritura del objeto
       }
 
@@ -73,6 +80,7 @@ export class VehiculoModel {
     });
 
     this.listaVehiculos = nuevoArray;
+    this.guardarLista();
   }
 
   guardarLista() {

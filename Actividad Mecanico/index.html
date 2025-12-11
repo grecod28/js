@@ -112,7 +112,7 @@
       <select id="filtroEstado">
         <option value="">-- Todos los estados --</option>
         <option value="P">Para reparar</option>
-        <option value="A">Arreglando</option>
+        <option value="A">Arreglado</option>
         <option value="R">Reparado</option>
       </select>
 
@@ -120,7 +120,7 @@
     </section>
 
     <dialog id="vehiculoDialog">
-      <button class="close-btn" id="closeModal">&times;</button>
+      <button class="close-btn">&times;</button>
       <h2>Detalles del Vehículo</h2>
       <p><strong>Matrícula:</strong> <span id="matricula-data"></span></p>
       <p><strong>Marca:</strong> <span id="marca-data"></span></p>
@@ -130,6 +130,20 @@
       <p><strong>Teléfono:</strong> <span id="telefonoCliente-data"></span></p>
       <p><strong>Problema:</strong> <span id="descripcion-data"></span></p>
       <p><strong>Estado:</strong> <span id="estado-data"></span></p>
+    </dialog>
+
+    <dialog id="reparacionesDialog">
+      <button class="close-btn">&times;</button>
+      <form id="reparacion-form">
+        <select id="mecanico-select"></select>
+        <textarea
+          id="descripcion-real"
+          placeholder="Descripcion real de la averia"
+        >
+        </textarea>
+        <input type="number" id="precio-reparacion" placeholder="precio" />
+        <button type="submit">Reparar</button>
+      </form>
     </dialog>
 
     <script defer type="module" src="./app.js"></script>

@@ -13,6 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const filtroEstado = document.getElementById("filtroEstado");
 
   const dialogoDatosVehiculo = document.getElementById("vehiculoDialog");
+  const dialogoReparaciones = document.getElementById("reparacionesDialog");
+  const formularioReparaciones = document.getElementById("reparacion-form");
+  const selectMecanico = document.getElementById("mecanico-select");
+
   const botonesCerrarDialogo = document.querySelectorAll(".close-btn");
 
   let vehiculos = controller.listarVehiculos();
@@ -22,6 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const parentElement = button.closest("dialog");
       parentElement.close();
     });
+  });
+
+  controller.listarMecanicos().forEach((mecanico) => {
+    selectMecanico.innerHTML += `<option value="${mecanico}">${mecanico}</option>`;
   });
 
   form.addEventListener("submit", (event) => {
@@ -70,6 +78,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  formularioReparaciones.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    try {
+      const mecanico = selectMecanico.value;
+      const descripcion = document.getElementById("descripcion-real").value;
+      const precio = document.getElementById("precio-reparacion").value;
+
+      // Recuperar la matricula guardada
+      const matriculaVehiculo = dialogoReparaciones.dataset.matricula;
+
+      controller.marcarComoReparado(
+        matriculaVehiculo,
+        mecanico,
+        descripcion,
+        precio
+      );
+      vehiculos = controller.listarVehiculos();
+      cargarVehiculos();
+
+      dialogoReparaciones.close();
+      formularioReparaciones.reset();
+    } catch (err) {
+      alert(err);
+    }
+  });
+
   cargarVehiculos();
 
   function cargarVehiculos(vh) {
@@ -110,8 +145,31 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       li.appendChild(botonVer);
 
+      const botonReparar = document.createElement("button");
+      botonReparar.textContent = "🛠️";
+      botonReparar.addEventListener("click", () => {
+        try {
+          dialogoReparaciones.showModal();
+          dialogoReparaciones.dataset.matricula = v.matricula;
+        } catch (err) {
+          alert(err);
+        }
+      });
+      li.appendChild(botonReparar);
+
       const botonEntregar = document.createElement("button");
       botonEntregar.textContent = "🚚";
+      botonEntregar.addEventListener("click", () => {
+        try {
+          controller.marcarComoRecogido(v.matricula);
+          vehiculos = controller.listarVehiculos();
+          cargarVehiculos();
+        } catch (err) {
+          alert(err);
+        }
+      });
+
+      li.appendChild(botonEntregar);
 
       listaVehiculos.appendChild(li);
     });

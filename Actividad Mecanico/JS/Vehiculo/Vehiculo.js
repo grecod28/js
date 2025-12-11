@@ -22,7 +22,7 @@ export class Vehiculo {
     this.telefonoCliente = telefonoCliente;
     this.descripcionProblemaCliente = descripcionProblemaCliente;
     this.estado = Vehiculo.estadosPosibles.paraArreglar;
-    this.reparacions = [];
+    this.reparaciones = [];
   }
 
   // Valida la estructura de la matricula

@@ -1,3 +1,4 @@
+import { Reparacion } from "./Reparacion/Reparacion.js";
 import { Vehiculo } from "./Vehiculo.js";
 import { VehiculoModel } from "./Vehiculo.model.js";
 
@@ -43,9 +44,18 @@ export class VehiculoController {
     return this.model.obtenerVehiculos();
   }
 
-  marcarComoRecogido() {}
+  listarMecanicos() {
+    return Reparacion.posiblesMecanicos;
+  }
 
-  repararVehiculo() {}
+  marcarComoRecogido(matricula) {
+    return this.model.recogerVehiculo(matricula);
+  }
+
+  marcarComoReparado(matriculaVehiculo, mecanico, descripcion, precio) {
+    Reparacion.validateSchema(descripcion, mecanico, precio);
+    return this.model.repararVehiculo(matriculaVehiculo);
+  }
 
   getEstadoKey(estado) {
     return Object.keys(Vehiculo.estadosPosibles).find(
