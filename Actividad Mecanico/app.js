@@ -145,6 +145,19 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       li.appendChild(botonVer);
 
+      const botonEmpezarReparacion = document.createElement("button");
+      botonEmpezarReparacion.textContent = "🔧";
+      botonEmpezarReparacion.addEventListener("click", () => {
+        try {
+          controller.marcarComoEnReparacion(v.matricula);
+          vehiculos = controller.listarVehiculos();
+          cargarVehiculos();
+        } catch (err) {
+          alert(err);
+        }
+      });
+      li.appendChild(botonEmpezarReparacion);
+
       const botonReparar = document.createElement("button");
       botonReparar.textContent = "🛠️";
       botonReparar.addEventListener("click", () => {

@@ -1,6 +1,7 @@
 export class Vehiculo {
   static estadosPosibles = {
     paraArreglar: "P",
+    arreglando: "N",
     arreglado: "A",
     recogido: "R",
   };

@@ -52,6 +52,10 @@ export class VehiculoController {
     return this.model.recogerVehiculo(matricula);
   }
 
+  marcarComoEnReparacion(matricula) {
+    return this.model.empezarReparacion(matricula);
+  }
+
   marcarComoReparado(matriculaVehiculo, mecanico, descripcion, precio) {
     Reparacion.validateSchema(descripcion, mecanico, precio);
     return this.model.repararVehiculo(matriculaVehiculo);

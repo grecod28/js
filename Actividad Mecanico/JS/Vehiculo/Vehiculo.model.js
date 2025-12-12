@@ -46,6 +46,27 @@ export class VehiculoModel {
     this.guardarLista();
   }
 
+  empezarReparacion(matricula) {
+    let nuevoArray = this.listaVehiculos.map((vehiculo) => {
+      // Si el ID es 1, devuelve un nuevo objeto con el precio actualizado
+
+      if (vehiculo.matricula === matricula) {
+        if (vehiculo.estado !== Vehiculo.estadosPosibles.paraArreglar)
+          throw new Error(
+            "No se puede empezar a reparar un vehiculo que no este para arreglar"
+          );
+
+        return { ...vehiculo, estado: Vehiculo.estadosPosibles.arreglando }; // Sobreescritura del objeto
+      }
+
+      // Si no, devuelve el objeto original
+      return vehiculo;
+    });
+
+    this.listaVehiculos = nuevoArray;
+    this.guardarLista();
+  }
+
   repararVehiculo(
     matricula,
     descripcion = "Sin descripcion",
@@ -57,9 +78,9 @@ export class VehiculoModel {
 
       console.log(vehiculo);
       if (vehiculo.matricula === matricula) {
-        if (vehiculo.estado !== Vehiculo.estadosPosibles.paraArreglar)
+        if (vehiculo.estado !== Vehiculo.estadosPosibles.arreglando)
           throw new Error(
-            "No se puede reparar un vehiculo que no esté para reparar"
+            "No se puede reparar un vehiculo que no esté en reparación"
           );
 
         const nuevaReparacion = new Reparacion(
