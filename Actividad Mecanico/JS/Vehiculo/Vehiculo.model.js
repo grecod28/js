@@ -52,11 +52,7 @@ export class VehiculoModel {
 
       if (vehiculo.matricula === matricula) {
         if (vehiculo.estado !== Vehiculo.estadosPosibles.paraArreglar)
-          throw new Error(
-            "No se puede empezar a reparar un vehiculo que no este para arreglar"
-          );
-
-        return { ...vehiculo, estado: Vehiculo.estadosPosibles.arreglando }; // Sobreescritura del objeto
+          return { ...vehiculo, estado: Vehiculo.estadosPosibles.arreglando }; // Sobreescritura del objeto
       }
 
       // Si no, devuelve el objeto original
